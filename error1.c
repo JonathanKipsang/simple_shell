@@ -111,4 +111,10 @@ return (ptr);
 * @buf: address of the string to modify
 * Return: None
 */
-void remove
+void remove_comments(char *buf)
+{
+    char *comment_ptr = NULL;
+    comment_ptr = strchr(buf, '#');
+    if (comment_ptr != NULL)
+        *comment_ptr = '\0';
+}

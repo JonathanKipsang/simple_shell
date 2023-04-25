@@ -3,16 +3,14 @@
 * get_history_file - gets the history file
 * @info: parameter struct
 *
-* Return: allocated string containg history file
+* Return: allocated string containing history file
 */
 char *get_history_file(info_t *info)
 {
 char *buf = NULL;
 char *dir = _getenv(info, "HOME=");
 if (!dir)
-{
 return (NULL);
-}
 buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
 if (!buf)
 {
@@ -40,15 +38,11 @@ list_t *node = NULL;
 ssize_t fd;
 filename = get_history_file(info);
 if (!filename)
-{
 return (-1);
-}
 fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 free(filename);
 if (fd == -1)
-{
 return (-1);
-}
 for (node = info->history; node; node = node->next)
 {
 _putsfd(node->str, fd);
@@ -56,9 +50,7 @@ _putfd('\n', fd);
 }
 _putfd(BUF_FLUSH, fd);
 if (close(fd) != -1)
-{
 result = 1;
-}
 return (result);
 }
 /**
@@ -76,19 +68,13 @@ char *buf = NULL, *filename = NULL;
 list_t *node = NULL;
 filename = get_history_file(info);
 if (!filename)
-{
 return (0);
-}
 fd = open(filename, O_RDONLY);
 free(filename);
 if (fd == -1)
-{
 return (0);
-}
 if (!fstat(fd, &st))
-{
 fsize = st.st_size;
-}
 if (fsize < 2)
 {
 close(fd);
@@ -119,10 +105,5 @@ last = i + 1;
 }
 }
 if (last != i)
-{
-build_history_list(info, buf + last, linecount++);
+build_history_list(info, buf + last, linecount);
 }
-free(buf);
-histcount = linecount;
-while (histcount-- >= HIST
-

@@ -105,8 +105,7 @@ return (1);
 * Return: 1 if replaced, 0 otherwise
 */
 int replace_vars(info_t *info)
-{
-int i = 0;
+{int i = 0;
 list_t *node;
 for (i = 0; info->argv[i]; i++)
 {
@@ -114,5 +113,15 @@ if (info->argv[i][0] != '$' || !info->argv[i][1])
 {
 continue;
 }
-if (!_strcmp(info->argv[i],
-
+if (!_strcmp(info->argv[i], "$?"))
+{
+free(info->argv[i]);
+info->argv[i] = _itoa(info->status);
+if (!info->argv[i])
+{
+return (0);
+}
+}
+}
+return (1);
+}

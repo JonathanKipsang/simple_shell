@@ -120,4 +120,4 @@ i++;
 prev_node = node;
 node = node->next;
 }
-
+}
